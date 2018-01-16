@@ -1,5 +1,5 @@
 <?php
-require_once './model/posts.php';
-$posts = posts();
-require_once './view/index.php';
-?>
+  var_dump($_GET);
+  $link_name = 'link';
+
+  require_once '/view/index.php';
