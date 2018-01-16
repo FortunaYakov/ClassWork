@@ -7,8 +7,8 @@
       $this->postModel = new Post();
     }
 
-    public function process($id) {
-      $post = $this->postModel->getPost($id);
+    protected function get() {
+      $post = $this->postModel->getPost($this->getData['id']);
 
       if (isset($post)) {
         require_once './view/post.php';
@@ -16,4 +16,6 @@
         $this->notFound();
       }
     }
+
+
   }

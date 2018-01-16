@@ -14,6 +14,7 @@
       <div class="row justify-content-md-center">
         <div class="col-md-10">
           <a href="/"><h1>Hello, user!</h1></a>
+          <a href="/?r=/addPost">add new post</a>
         </div>
         <?php foreach ($posts as $index => $post) { ?>
           <div class="col-md-10">

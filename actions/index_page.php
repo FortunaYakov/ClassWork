@@ -7,7 +7,7 @@
       $this->postModel = new Post();
     }
 
-    public function process() {
+    protected function get() {
       $posts = $this->postModel->getPosts();
       require_once './view/index.php';
     }

@@ -4,10 +4,12 @@ class Router {
   const ROUTE_KEY = 'r';
 
   private $getArray;
+  private $postArray;
   private $actionArray = [];
 
-  public function __construct($getArray) {
+  public function __construct($getArray, $postArray) {
     $this->getArray = $getArray;
+    $this->postArray = $postArray;
   }
 
   public function attach($actionName, $action) {
@@ -17,10 +19,13 @@ class Router {
   public function serve() {
     switch ($this->getArray[self::ROUTE_KEY]) {
       case '/':
-        $this->actionArray['indexPage']->process();
+        $this->actionArray['indexPage']->process($this->getArray, $this->postArray);
         break;
       case '/post':
-        $this->actionArray['postPage']->process($this->getArray['id']);
+        $this->actionArray['postPage']->process($this->getArray, $this->postArray);
+        break;
+      case '/addPost':
+        $this->actionArray['addPostPage']->process($this->getArray, $this->postArray);
         break;
 
       default:
