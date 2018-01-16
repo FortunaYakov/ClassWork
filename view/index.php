@@ -30,6 +30,10 @@
                 </p>
                 <p class="lead">
                   author: <?php echo $post['author']; ?>
+                  <form method="POST" action="/index.php?r=/deletePost">
+                    <input type="hidden" value="<?php echo $post['id'] ?>" name="id">
+                    <input type="submit" value="Destroy!" class="btn btn-default">
+                  </form>
                 </p>
               </div>
             </div>

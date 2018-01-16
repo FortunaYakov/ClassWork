@@ -27,6 +27,9 @@ class Router {
       case '/addPost':
         $this->actionArray['addPostPage']->process($this->getArray, $this->postArray);
         break;
+      case '/deletePost':
+        $this->actionArray['deletePostPage']->process($this->getArray, $this->postArray);
+        break;
 
       default:
         header('location: /index.php?r=/');
