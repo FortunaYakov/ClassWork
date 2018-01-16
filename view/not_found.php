@@ -14,26 +14,9 @@
       <div class="row justify-content-md-center">
         <div class="col-md-10">
           <a href="/"><h1>Hello, user!</h1></a>
+          <div>Your Entry was not found! You may return to the main page: <a href="/index.php?r=/">main page</a></div>
         </div>
-        <?php foreach ($posts as $index => $post) { ?>
-          <div class="col-md-10">
-            <div class="jumbotron jumbotron-fluid">
-              <div class="container">
-                <a href="/index.php?r=/post&id=<?php echo $index; ?>">
-                  <h1 class="display-3">
-                    <?php echo $post['title']; ?>
-                  </h1>
-                </a>
-                <p class="lead">
-                  <?php echo $post['body']; ?>
-                </p>
-                <p class="lead">
-                  author: <?php echo $post['author']; ?>
-                </p>
-              </div>
-            </div>
-          </div>
-        <?php } ?>
+
       </div>
     </div>
   </body>

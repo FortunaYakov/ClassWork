@@ -1,8 +1,15 @@
 <?php
+  require_once './model/post.php';
 
-require_once '/model/posts.php';
+  require_once './router.php';
 
-$post = new Post();
-$posts = $post->getPosts();
+  require_once './actions/base_page.php';
+  require_once './actions/index_page.php';
+  require_once './actions/post_page.php';
 
-require_once './view/index.php';
+  $router = new Router($_GET);
+
+  $router->attach('indexPage', new IndexPage());
+  $router->attach('postPage', new PostPage());
+
+  $router->serve();
