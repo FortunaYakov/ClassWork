@@ -2,7 +2,7 @@
 /**
  *  Создание коментариев
  */
-class AddCommentPage extends Comment
+class AddCommentPage extends BasePage
 {
   private $commentModel;
   private $errors = [];
