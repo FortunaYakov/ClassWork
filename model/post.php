@@ -1,8 +1,11 @@
 <?php
 
   class Post extends BaseModel {
+    private $postsOnPage;
+
     public function __construct() {
       parent::__construct();
+      $this->postsOnPage = 10;
     }
 
     public function validate($title, $body, $author) {
@@ -23,9 +26,27 @@
       return $errors;
     }
 
-    public function getPosts() {
-      $res = $this->conn->query('SELECT * FROM posts');
-      return $res->fetchAll(PDO::FETCH_ASSOC);
+    public function pageNumber() {
+      $res = $this->conn->query('SELECT count(id) as count FROM posts');
+      $totalNumber = $res->fetch(PDO::FETCH_ASSOC)['count'];
+
+      return ceil($totalNumber / $this->postsOnPage);
+    }
+
+    public function getPosts($pageNumber) {
+      $offsetValue = ($pageNumber - 1) * $this->postsOnPage;
+
+      $stmt = $this->conn->prepare('SELECT * FROM posts LIMIT :lim OFFSET :offs');
+      $stmt->bindParam(':lim', $this->postsOnPage, PDO::PARAM_INT);
+      $stmt->bindParam(':offs', $offsetValue, PDO::PARAM_INT);
+      $stmt->execute();
+
+      return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function updatePost($id, $title, $body, $author) {
+      $stmt = $this->conn->prepare('UPDATE posts SET title = ?, body = ?, author = ? WHERE id = ?');
+      $stmt->execute([$title, $body, $author, $id]);
     }
 
     public function getPost($id) {

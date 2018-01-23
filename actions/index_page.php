@@ -8,7 +8,14 @@
     }
 
     protected function get() {
-      $posts = $this->postModel->getPosts();
+      if (isset($this->getData['page'])) {
+        $currentPage = $this->getData['page'];
+      } else {
+        $currentPage = 1;
+      }
+
+      $posts = $this->postModel->getPosts($currentPage);
+      $pageNumber = $this->postModel->pageNumber();
       require_once './view/index.php';
     }
   }
