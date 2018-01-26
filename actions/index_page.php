@@ -8,14 +8,11 @@
     }
 
     protected function get() {
-      if (isset($this->getData['page'])) {
-        $currentPage = $this->getData['page'];
-      } else {
-        $currentPage = 1;
+      $posts = $this->postModel->getPostsWithCommentsCount();
+      if (isset($this->session['username'])) {
+        echo 'Hello, ' . $this->session['username'] . '!';
       }
 
-      $posts = $this->postModel->getPosts($currentPage);
-      $pageNumber = $this->postModel->pageNumber();
       require_once './view/index.php';
     }
   }

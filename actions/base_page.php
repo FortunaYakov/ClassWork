@@ -3,6 +3,8 @@
   class BasePage {
     protected $getData;
     protected $postData;
+    protected $session;
+
 
     protected function notFound() {
       require_once './view/not_found.php';
@@ -12,14 +14,27 @@
       header('location: /?r=' . $url);
     }
 
-    public function process($getData, $postData) {
+    public function isLoggedIn() {
+      if (isset($this->session['username'])) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    public function process($method, $getData, $postData, &$session) {
       $this->getData = $getData;
       $this->postData = $postData;
+      $this->session = &$session;
 
-      if (empty($postData)) {
-        $this->get();
-      } else {
-        $this->post();
+      switch ($method) {
+        case 'GET':
+          $this->get();
+          break;
+        case 'POST':
+          $this->post();
+          break;
       }
+
     }
   }

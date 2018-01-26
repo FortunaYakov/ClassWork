@@ -13,8 +13,16 @@
     <div class="container">
       <div class="row justify-content-md-center">
         <div class="col-md-10">
-  <a class="btn btn-outline-warning btn-lg" href="/" role="button">Start Page</a>
-  <a class="btn btn-success btn-sm" href="/?r=/addPost" role="button">add new post</a>
+          <a class="btn btn-outline-warning btn-lg" href="/" role="button">Start Page</a>
+          <a class="btn btn-success btn-sm" href="/?r=/addPost" role="button">add new post</a>
+          <?php Var_dump($_SESSION); if ($this->isLoggedIn()) { ?>
+            <form method="POST" action="/index.php?r=/logout">
+              <input type="submit" class="btn btn-danger" name="logout" value="Logout!">
+            </form>
+          <?php } else { ?>
+            <a href="/?r=/register">register</a>
+            <a href="/?r=/login">login</a>
+          <?php } ?>
         </div>
         <?php foreach ($posts as $post) { ?>
           <div class="col-md-10">
@@ -29,7 +37,7 @@
                   <?php echo $post['body']; ?>
                 </p>
                 <p class="lead">
-                  author: <?php echo $post['author']; ?>
+                  author: <?php echo $post['author']; ?>, comments count: <?php echo $post['comments_count']; ?>
                   <form method="POST" action="/index.php?r=/deletePost">
                     <input type="hidden" value="<?php echo $post['id'] ?>" name="id">
                     <input type="submit" value="Destroy!" class="btn btn-default">

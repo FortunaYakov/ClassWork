@@ -63,6 +63,11 @@
       return $this->conn->lastInsertId();
     }
 
+    public function getPostsWithCommentsCount() {
+      $res = $this->conn->query('SELECT p.id, p.author, p.title, p.body, COUNT(c.id) as comments_count FROM posts as p LEFT JOIN comments as c ON p.id = c.post_id GROUP BY p.id');
+      return $res->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
     public function deletePost($id) {
       $stmt = $this->conn->prepare('DELETE FROM posts WHERE id = ?');
       $stmt->execute([$id]);
