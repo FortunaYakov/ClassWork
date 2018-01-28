@@ -21,6 +21,13 @@
         return false;
       }
     }
+    public function isYourPost($user_id) {
+      if ($user_id == $this->session['id']) {
+        return true;
+      } else {
+        return false;
+      }
+    }
 
     public function process($method, $getData, $postData, &$session) {
       $this->getData = $getData;

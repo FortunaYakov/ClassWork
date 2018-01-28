@@ -12,22 +12,35 @@
   <body>
     <div class="container">
       <div class="row justify-content-md-center">
-        <div class="col-md-10">
-          <a class="btn btn-outline-warning btn-lg" href="/" role="button">Start Page</a>
-          <a class="btn btn-success btn-sm" href="/?r=/addPost" role="button">add new post</a>
-          <?php Var_dump($_SESSION); if ($this->isLoggedIn()) { ?>
+        <div class="col-md-8">
+          <a class="btn btn-warning btn-lg" href="/" role="button">Start Page</a>
+        </div>
+        <div class="col-md-1">
+          <?php if ($this->isLoggedIn()) { ?>
             <form method="POST" action="/index.php?r=/logout">
-              <input type="submit" class="btn btn-danger" name="logout" value="Logout!">
+              <div class="form-group">
+                <span class="badge badge-info"><?php echo $this->session['username'];?></span>
+                <input type="submit" class="btn btn-danger" name="logout" value="Logout!">
+              </div>
             </form>
           <?php } else { ?>
-            <a href="/?r=/register">register</a>
-            <a href="/?r=/login">login</a>
+            <a class="btn btn-outline-info" href="/?r=/register">REGISTRATION</a>
+            <a class="btn btn-success btn-sm" href="/?r=/login">Login</a>
           <?php } ?>
         </div>
+        <?php if ($this->isLoggedIn()) { ?>
+        <div class="col-md-5">
+          <a class="btn btn-success btn-sm" href="/?r=/addPost" role="button">Add new post</a>
+        </div><?php } ?>
+        <!-- <div class="btn-group" role="group"> -->
+          <!-- <button type="button" class="btn btn-secondary">Left</button> -->
+          <!-- <button type="button" class="btn btn-secondary">Middle</button> --> 
+          <!-- <button type="button" class="btn btn-secondary">Right</button> -->
+        <!-- </div> -->
         <?php foreach ($posts as $post) { ?>
           <div class="col-md-10">
             <div class="jumbotron jumbotron-fluid">
-              <div class="container">
+              <div class="container-fluid">
                 <a href="/index.php?r=/post&id=<?php echo $post['id']; ?>">
                   <h1 class="display-3">
                     <?php echo $post['title']; ?>
@@ -37,12 +50,26 @@
                   <?php echo $post['body']; ?>
                 </p>
                 <p class="lead">
-                  author: <?php echo $post['author']; ?>, comments count: <?php echo $post['comments_count']; ?>
-                  <form method="POST" action="/index.php?r=/deletePost">
+                  <span class="badge badge-info">author: <?php echo $post['author']; ?></span>
+                  <span class="badge badge-pill badge-secondary">comments count:<?php echo $post['comments_count']; ?></span>
+                <ul class="list-group">
+                  <?php $comment=$this->commentModel->getLastComment($post['id']); ?>
+                    <li class="list-group-item list-group-item-primary">
+                      <?php echo $comment['author'];?>:<?php echo $comment['body'];?>
+                    </li>
+                </ul>
+
+                <?php if ($this->isLoggedIn()) {if($this->isYourPost($post['user_id'])) {?>
+                <form method="POST" action="/index.php?r=/deletePost">
+                  <label class="col-sm-2 col-form-label">Delete Post? </label>
+                  <div class="form-group row">
                     <input type="hidden" value="<?php echo $post['id'] ?>" name="id">
-                    <input type="submit" value="Destroy!" class="btn btn-default">
-                  </form>
-                </p>
+                  <div class="col-sm-10">
+                      <input type="submit" value="Delete!" class="btn btn-danger">
+                  </div>
+                  </div>
+                </form>
+                  <?php }} ?>
               </div>
             </div>
           </div>

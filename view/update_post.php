@@ -24,7 +24,6 @@
           <form method="POST" action="/index.php?r=/updatePost" class="form">
             <input type="hidden" name="id" value="<?php echo $post['id']; ?>">
             <input type="text" name="title" placeholder="title" value="<?php echo $post['title']; ?>">
-            <input type="text" name="author" placeholder="author" value="<?php echo $post['author']; ?>">
             <textarea name="body"><?php echo $post['body']; ?></textarea>
             <input type="submit" value="Update!">
           </form>

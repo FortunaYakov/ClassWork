@@ -13,7 +13,7 @@ class AddCommentPage extends BasePage
   protected function post() {
     $post_id=$this->commentModel->addComment($this->postData['post_id'],
                                             $this->postData['body'],
-                                            $this->postData['author']);
+                                            $this->session['id']);
 
     $this->redirect('/post&id=' . $post_id);
   }

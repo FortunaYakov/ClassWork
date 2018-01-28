@@ -14,13 +14,18 @@
       <div class="row justify-content-md-center">
         <div class="col-md-10">
 
-          <form method="POST" action="/index.php?r=/login" class="form">
-              <input type="text" name="username" placeholder="username">
-              <input type="password" name="password" placeholder="password">
-              <input type="submit" value="Login!">
+          <form method="POST" action="/index.php?r=/login">
+            <div class="form-group">
+               <label>Login</label>
+              <input type="text" class="form-control" name="username" placeholder="username">
+            </div>
+            <div class="form-group">
+               <label>Password</label>
+              <input type="password" class="form-control" name="password" placeholder="password">
+            </div>
+              <input type="submit" class="btn btn-primary" value="Login!">
           </form>
         </div>
-
       </div>
     </div>
   </body>

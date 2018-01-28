@@ -15,9 +15,9 @@ class RegisterUserPage extends BasePage {
   protected function post() {
     $username = $this->postData['username'];
     $password = $this->postData['password'];
-    $passwordApprove = $this->postData['password_approve'];
+    $passwordConfirm = $this->postData['password_confirm'];
 
-    if ($password != $passwordApprove) {
+    if ($password != $passwordConfirm) {
       $this->redirect('/register');
     }
 

@@ -12,9 +12,21 @@
   <body>
     <div class="container">
       <div class="row justify-content-md-center">
-        <div class="col-md-10">
+        <div class="col-md-8">
           <a class="btn btn-outline-warning btn-lg" href="/" role="button">Start Page</a>
-          <h2>You are reading '<?php echo $post['title']; ?>'</h2>
+        </div>
+        <div class="col-md-1">
+          <?php if ($this->isLoggedIn()) { ?>
+            <form method="POST" action="/index.php?r=/logout">
+              <div class="form-group">
+                <span class="badge badge-info"><?php echo $this->session['username'];?></span>
+                <input type="submit" class="btn btn-danger" name="logout" value="Logout!">
+              </div>
+            </form>
+          <?php } else { ?>
+            <a class="btn btn-outline-info" href="/?r=/register">REGISTRATION</a>
+            <a class="btn btn-success btn-sm" href="/?r=/login">Login</a>
+          <?php } ?>
         </div>
           <div class="col-md-10">
             <div class="jumbotron jumbotron-fluid">
@@ -28,8 +40,9 @@
                 <p class="lead">
                   author: <?php echo $post['author']; ?>
                 </p>
-
+                <?php if ($this->isLoggedIn()) {if($this->isYourPost($post['user_id'])) {?>
                 <a href="/index.php?r=/updatePost&id=<?php echo $post['id']; ?>" class="btn btn-default">Update Post</a>
+              <?php }} ?>
               </div>
             </div>
             <ul class="list-group">
@@ -44,10 +57,7 @@
               <div class="col-7">
                 <input class="form-control" type="text" name="body" placeholder="your opinion" >
               </div>
-              <div class="col">
-                <input class="form-control" type="text" name="author" placeholder="author">
-              </div>
-              <input type="submit"  class="btn btn-primary" value="comment!">
+                <input type="submit"  class="btn btn-primary" value="comment!">
               </div>
             </form>
 

@@ -23,33 +23,24 @@
 
           <form method="POST" action="/index.php?r=/addPost" class="form">
             <?php if (isset($oldValues)) { ?>
-            <div class="form-row">
-              <div class="col">
+            <div class="form-group">
               <input type="text" class="form-control" name="title" placeholder="title" value="<?php echo $oldValues['title']; ?>">
-              </div>
-              <div class="col">
-              <input type="text" class="form-control" name="author" placeholder="author" value="<?php echo $oldValues['author']; ?>">
-              </div>
-              <div class="col">
-              <textarea name="body" class="form-control"><?php echo $oldValues['body']; ?></textarea>
-              </div>
-              </div>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" name="body"><?php echo $oldValues['body']; ?></textarea>
+            </div>
             <?php } else { ?>
-            <div class="form-row">
-              <div class="col">
+              <div class="form-group">
               <input type="text" class="form-control" name="title" placeholder="title">
               </div>
-              <div class="col">
-              <input type="text" class="form-control" name="author" placeholder="author">
-              </div>
-              <div class="col">
+              <div class="form-group">
               <textarea class="form-control" name="body"></textarea>
               </div>
-            </div>
             <?php }?>
-            <input type="submit"  class="btn btn-primary mb-2" value="Create!">
+            <input type="submit" class="btn btn-success" value="Create!">
           </form>
         </div>
+
       </div>
     </div>
   </body>

@@ -16,7 +16,7 @@ class UpdatePostPage extends BasePage {
     $this->postModel->updatePost($this->postData['id'],
                                  $this->postData['title'],
                                  $this->postData['body'],
-                                 $this->postData['author']);
+                                 $this->session['id']);
 
     $this->redirect('/post&id=' . $this->postData['id']);
   }

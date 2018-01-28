@@ -13,12 +13,20 @@
     <div class="container">
       <div class="row justify-content-md-center">
         <div class="col-md-10">
-
-          <form method="POST" action="/index.php?r=/register" class="form">
-              <input type="text" name="username" placeholder="username">
-              <input type="password" name="password" placeholder="password">
-              <input type="password" name="password_approve" placeholder="password_approve">
-              <input type="submit" value="Register!">
+          <form method="POST" action="/index.php?r=/register" >
+              <div class="form-group">
+              <label>Login</label>
+              <input type="text" class="form-control" name="username" placeholder="username">
+            </div>
+            <div class="form-group">
+              <label>Password</label>
+              <input type="password" class="form-control" name="password" placeholder="password">
+            </div>
+            <div class="form-group">
+              <label>Confirm Your Password</label>
+              <input type="password" class="form-control" name="password_confirm" placeholder="password_confirm">
+            </div>
+            <input type="submit" class="btn btn-success" value="Register!">
           </form>
         </div>
 

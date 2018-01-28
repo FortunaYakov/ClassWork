@@ -14,8 +14,7 @@
 
     protected function post() {
       $validateErrors = $this->postModel->validate($this->postData['title'],
-                                                   $this->postData['body'],
-                                                   $this->postData['author']);
+                                                   $this->postData['body']);
 
       if (!empty($validateErrors)) {
         $oldValues = $this->postData;
@@ -25,7 +24,7 @@
 
       $id = $this->postModel->addPost($this->postData['title'],
                                       $this->postData['body'],
-                                      $this->postData['author']);
+                                      $this->session['id']);
 
       $this->redirect('/post&id=' . $id);
     }
